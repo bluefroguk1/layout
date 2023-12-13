@@ -1,0 +1,91 @@
+<div class="content-wrapper">
+  {{#if leftSidebarEnabled}}
+    <aside class="sidebar left {{leftClasses}}" style={{leftStyle}}>
+      {{#if canHideLeftSidebar}}
+        {{d-button
+          class="toggle-sidebar left"
+          action=(action "toggleSidebar")
+          actionParam="left"
+          icon=toggleLeftSidebarIcon}}
+      {{/if}}
+      
+      {{sidebar-container
+        side="left"
+        topic=model
+        customSidebarProps=customSidebarProps
+        tabletView=tabletView
+        mobileView=mobileView
+        sidebarMinimized=leftSidebarMinimized
+        category=category
+        filter=sidebarFilter
+        context=layouts_context}}
+      
+      {{plugin-outlet
+        name="sidebar-left-bottom"
+        connectorTagName="div"
+        outletArgs=(hash
+          customSidebarProps=customSidebarProps
+          category=category
+          tabletView=tabletView
+          mobileView=mobileView
+          sidebarMinimized=leftSidebarMinimized
+          context=layouts_context
+          path=path)}}
+    </aside>
+  {{/if}}
+  
+  <div class="main-content {{mainClasses}}" style={{mainStyle}}>
+    {{plugin-outlet name="above-layouts-main-content"}}
+    {{outlet 'main-content'}}
+  </div>
+  
+  {{#if rightSidebarEnabled}}
+    <aside class="sidebar right {{rightClasses}}" style={{rightStyle}}>
+      {{#if canHideRightSidebar}}
+        {{d-button
+          class="toggle-sidebar right"
+          action=(action "toggleSidebar")
+          actionParam="right"
+          icon=toggleRightSidebarIcon}}
+      {{/if}}
+      
+      {{sidebar-container
+        side="right"
+        topic=model
+        customSidebarProps=customSidebarProps
+        tabletView=tabletView
+        mobileView=mobileView
+        sidebarMinimized=rightSidebarMinimized
+        category=category
+        filter=sidebarFilter
+        context=layouts_context}}
+      
+      {{plugin-outlet
+        name="sidebar-right-bottom"
+        connectorTagName="div"
+        outletArgs=(hash
+          customSidebarProps=customSidebarProps
+          category=category
+          tabletView=tabletView
+          mobileView=mobileView
+          sidebarMinimized=rightSidebarMinimized
+          context=layouts_context
+          path=path)}}
+    </aside>
+  {{/if}}
+  
+  {{#if showMobileMenu}}
+    <div class="layouts-mobile-menu">
+      {{#each mobileMenuItems as |item|}}
+        {{#d-button
+          class=item.class
+          action=(action item.action)
+          actionParam=item.actionParam
+        }}
+          {{item.icon}}
+        {{/d-button}}
+      {{/each}}
+    </div>
+    <div class="sidebar-cloak"></div>
+  {{/if}}
+</div>

@@ -1,0 +1,136 @@
+$body-extension: 150px;
+$timeline-buffer: 100px;
+
+body .main-content.topic {
+  .container.posts {
+    grid-template-columns: calc(100% - 100px) 100px;
+
+    @media screen and (max-width: 924px) {
+      grid-template-areas: "posts posts";
+    }
+  }
+
+  .topic-area > .loading-container {
+    width: 100%;
+  }
+
+  .cooked img:not(.thumbnail) {
+    // this is necessary because of the image-sizing-hack in Discourse
+    max-width: 100% !important;
+    object-fit: contain;
+  }
+
+  // TOC needs more breathing room when there's a left sidebar
+  :not(.rtl) .d-toc-post .d-toc-article {
+    > .row {
+      padding-right: 20px;
+    }
+    > .d-toc {
+      max-width: 250px;
+    }
+  }
+
+  .topic-body {
+    max-width: 100%;
+  }
+}
+
+body:not(.layouts-left-full) .main-content.topic {
+  &.left-sidebar {
+    .topic-body {
+      width: calc(
+        (
+            #{$topic-body-width} + #{$topic-body-width-padding * 2} + #{$body-extension}
+          ) - var(--mainLeftOffset)
+      );
+      max-width: calc(
+        (
+            #{$topic-body-width} + #{$topic-body-width-padding * 2} + #{$body-extension}
+          ) - var(--mainLeftOffset)
+      );
+    }
+
+    .post-notice,
+    .small-action {
+      max-width: calc(
+        (
+            #{$topic-body-width} + #{$topic-body-width-padding * 2} + #{$body-extension}
+          ) + #{$topic-avatar-width} - var(--mainLeftOffset)
+      );
+    }
+
+    .timeline-container {
+      margin-left: calc(
+        (
+            #{$topic-body-width} + #{$topic-body-width-padding * 2} + #{$body-extension} +
+              #{$timeline-buffer}
+          ) - var(--mainLeftOffset)
+      );
+    }
+
+    &.right-sidebar,
+    :not(.rtl) .d-toc-post {
+      article.onscreen-post > .row {
+        display: flex;
+
+        .topic-avatar {
+          float: none;
+        }
+      }
+    }
+  }
+
+  &.right-sidebar {
+    #topic-progress-wrapper {
+      max-width: calc(
+        (#{$topic-body-width} + #{$body-extension}) + #{$topic-avatar-width} - var(
+            --mainLeftOffset
+          ) - #{$topic-body-width-padding * 2}
+      );
+    }
+
+    .container.posts {
+      display: grid;
+      grid-template-areas: "posts timeline";
+      grid-template-columns: auto 0px;
+    }
+
+    .topic-navigation {
+      grid-area: posts;
+      grid-row: 2;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      #topic-progress-wrapper {
+        &.docked {
+          margin: unset;
+        }
+      }
+    }
+  }
+}
+
+// DiscoTOC Compatability
+
+.d-toc-timeline {
+  .container.posts {
+    grid-template-areas: "posts";
+    grid-template-columns: auto;
+
+    .topic-navigation {
+      grid-area: unset;
+      display: none;
+    }
+  }
+  &.d-toc-timeline-visible {
+    .container.posts {
+      grid-template-areas: "posts timeline";
+      grid-template-columns: auto auto;
+
+      .topic-navigation {
+        grid-area: timeline;
+      }
+    }
+  }
+}

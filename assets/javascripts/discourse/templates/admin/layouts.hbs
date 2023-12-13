@@ -1,0 +1,8 @@
+{{#admin-nav}}
+  {{nav-item route='adminLayouts.widgets' label='admin.layouts.widgets.nav'}}
+  <li><DButton @action={{route-action "showSettings"}} @data-auto-route={{true}} @label="admin.layouts.settings.label" /></li>
+{{/admin-nav}}
+
+<div class="admin-container">
+  {{outlet}}
+</div>
