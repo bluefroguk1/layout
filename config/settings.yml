@@ -1,4 +1,81 @@
-TODO_plugin_name:
-  plugin_name_enabled:
-    default: false
+plugins:
+  layouts_enabled:
     client: true
+    default: true
+  layouts_sidebar_left_width:
+    client: true
+    default: 250
+  layouts_sidebar_right_width:
+    client: true
+    default: 250
+  layouts_sidebar_left_position:
+    client: true
+    default: 'fixed'
+    type: enum
+    choices:
+      - fixed
+      - absolute
+      - sticky
+      - full
+  layouts_sidebar_right_position:
+    client: true
+    default: 'fixed'
+    type: enum
+    choices:
+      - fixed
+      - absolute
+      - sticky
+  layouts_sidebar_left_can_hide:
+    client: true
+    type: list
+    default: ''
+    choices:
+      - Topic List
+      - Topic
+      - Profile
+      - Tags
+  layouts_sidebar_right_can_hide:
+    client: true
+    type: list
+    default: ''
+    choices:
+      - Topic List
+      - Topic
+      - Profile
+      - Tags
+  layouts_sidebar_hide_icon:
+    default: 'minus'
+    client: true
+  layouts_sidebar_show_icon:
+    default: 'plus'
+    client: true
+  layouts_sidebar_left_default_visibility:
+    client: true
+    default: 'show'
+    type: enum
+    choices:
+      - show
+      - hide
+  layouts_sidebar_right_default_visibility:
+    client: true
+    default: 'show'
+    type: enum
+    choices:
+      - show
+      - hide
+  layouts_sidebar_left_default_minimized:
+    client: true
+    default: false
+  layouts_sidebar_mobile_threshold:
+    client: true
+    default: 550
+  layouts_sidebar_tablet_threshold:
+    client: true
+    default: 850 
+  layouts_mobile_enabled:
+    client: true
+    default: false
+  layouts_mobile_menu:
+    client: true
+    type: list
+    default: ''
